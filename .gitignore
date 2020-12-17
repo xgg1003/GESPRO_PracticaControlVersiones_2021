@@ -1,4 +1,4 @@
-
+# Created by https://www.gitignore.io/api/android,intellij,opencv,gradle
 
 ### Android ###
 # Built application files
@@ -23,7 +23,7 @@ build/
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 
-@@ -26,15 +26,13 @@ build/
+
 
 # Ignore Gradle GUI config
 gradle-app.setting
