@@ -42,3 +42,12 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
+
+
+## Miembros del equipo:
+
+[Oscar García González](https://github.com/xgg1003)
+
+[José Ángel López Estrada](https://github.com/jle1001) 
+
+[Rubén Herrero Vicario](https://github.com/rhv1001)
