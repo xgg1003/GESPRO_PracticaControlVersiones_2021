@@ -16,13 +16,14 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
+@@ -19,10 +19,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 apply plugin: 'realm-android'
-
+apply plugin: 'io.fabric'
 
 // Get signing config
-def keystorePropertiesFile = rootProject.file("app/keys/keystore.properties")
+def keystorePropertiesFile = rootProject.file("secrets/keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
@@ -33,32 +34,46 @@ android {
 
     defaultConfig {
         applicationId "com.davidmiguel.gobees"
-
         minSdkVersion 19
         targetSdkVersion 26
-
         versionCode 11
         versionName "v1.1"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+manifestPlaceholders = [
+                crashlyticsKey: keystoreProperties['CrashlyticsKey']
+        ]
+        buildConfigField 'String', 'COMMIT_HASH', "\"${getCommitHash()}\""
+        buildConfigField 'String', 'BUILD_DATE', "\"${getBuildDate()}\""
+        buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', keystoreProperties['OpenWeatherMapApiKey']
     }
 
     signingConfigs {
-        relase {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+ 	 debug {
+            keyAlias keystoreProperties['keyAliasDebug']
+            keyPassword keystoreProperties['keyPasswordDebug']
+            storeFile file(keystoreProperties['storeFileDebug'])
+            storePassword keystoreProperties['storePasswordDebug']
         }
+        relase {
+toreFile file(keystoreProperties['storeFileRelease'])
+            storePassword keystoreProperties['storePasswordRelease']
+            keyAlias keystoreProperties['keyAliasRelease']
+            keyPassword keystoreProperties['keyPasswordRelease']        }
     }
 
     buildTypes {
         debug {
             testCoverageEnabled true
+		 aaptOptions {
+                cruncherEnabled = false // No img optimization in debug
+            }
         }
         release {
             shrinkResources true // Remove unused resources
             minifyEnabled true // Enable proguard (shrinks, optimizes and obfuscates code)
+		 debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     'proguard-guava.pro',
                     'proguard-mpandroidchart.pro',
