@@ -152,9 +152,9 @@ dependencies {
     //----------------------------------------------------------------------------------------------
     // Debugging / logging dependencies
     //----------------------------------------------------------------------------------------------
-
-    // Timber (logger) : https://github.com/JakeWharton/timber
-    compile 'com.jakewharton.timber:timber:4.5.1'
+	
+    // Firebase Analytics : https://firebase.google.com/docs/android/setup#available_libraries
+    compile 'com.google.firebase:firebase-core:11.4.0'
 
     //----------------------------------------------------------------------------------------------
     // Testing Dependencies
@@ -231,3 +231,5 @@ sonarqube {
         property "sonar.jacoco.reportMissing.force.zero", true
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

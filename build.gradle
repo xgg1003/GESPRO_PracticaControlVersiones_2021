@@ -35,6 +35,9 @@ plugins {
     id "org.sonarqube" version "2.5"
 }
 
+// Google Services Gradle Plugin (for Firebase) : https://developers.google.com/android/guides/google-services-plugin
+    classpath 'com.google.gms:google-services:3.1.0'
+
 allprojects {
     repositories {
         jcenter()
