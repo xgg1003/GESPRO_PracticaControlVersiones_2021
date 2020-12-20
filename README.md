@@ -45,5 +45,7 @@ GNU General Public License for more details.
 
 # Miembros del grupo
 [Oscar García González](https://github.com/xgg1003)
+
 [Ruben Herrero Vicario](https://github.com/rhv1001)
+
 [José Ángel López](https://github.com/jle1001)
