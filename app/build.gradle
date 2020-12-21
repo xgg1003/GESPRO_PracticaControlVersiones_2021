@@ -19,6 +19,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 apply plugin: 'realm-android'
+apply plugin: 'io.fabric'
+apply plugin: 'com.github.triplet.play'
 
 // App version
 ext.versionMajor = 1 // API Changes, adding big new feature, redesign the App
@@ -36,18 +38,6 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.1'
 
-    defaultConfig {
-        applicationId "com.davidmiguel.gobees"
-
-        minSdkVersion 19
-        targetSdkVersion 26
-
-        versionCode generateVersionCode()
-        versionName generateVersionName()
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-
     signingConfigs {
         relase {
             keyAlias keystoreProperties['keyAlias']
@@ -56,6 +46,35 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+	
+    playAccountConfigs {
+        defaultAccountConfig {
+            serviceAccountEmail = keystoreProperties['serviceAccountEmail']
+            jsonFile = file(keystoreProperties['googlePlayKey'])
+        }
+    }
+
+    play {
+        track = 'beta'
+    }
+
+    defaultConfig {
+        applicationId "com.davidmiguel.gobees"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode generateVersionCode()
+        versionName generateVersionName()
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                crashlyticsKey: keystoreProperties['CrashlyticsKey']
+        ]
+        buildConfigField 'String', 'COMMIT_HASH', "\"${getCommitHash()}\""
+        buildConfigField 'String', 'BUILD_DATE', "\"${getBuildDate()}\""
+        buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', keystoreProperties['OpenWeatherMapApiKey']
+        playAccountConfig = playAccountConfigs.defaultAccountConfig
+    }
+
+
 
     buildTypes {
         debug {
@@ -245,8 +264,7 @@ apply plugin: 'com.google.gms.google-services'
  * Returns the number of the current build in Travis.
  */
 private static Integer getBuildNumber() {
-    return System.getenv()["TRAVIS_BUILD_NUMBER"] as Integer ?: 0
-}
+     return System.getenv()["TRAVIS_BUILD_NUMBER"] as Integer ?: 1}
 
 /**
  * Version code: MMMmmppbbb
