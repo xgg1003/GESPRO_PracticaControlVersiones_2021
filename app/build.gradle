@@ -46,7 +46,7 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-	
+
     playAccountConfigs {
         defaultAccountConfig {
             serviceAccountEmail = keystoreProperties['serviceAccountEmail']
@@ -159,7 +159,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0' 
+    compile 'com.android.support:design:26.1.0'
    // Google Location and Activity Recognition : https://developers.google.com/android/guides/setup
     compile 'com.google.android.gms:play-services-location:11.4.0'
     // OpenCV (computer vision) : https://github.com/davidmigloz/opencv-android-gradle-repo/
@@ -177,9 +177,16 @@ dependencies {
     //----------------------------------------------------------------------------------------------
     // Debugging / logging dependencies
     //----------------------------------------------------------------------------------------------
-	
+
     // Firebase Analytics : https://firebase.google.com/docs/android/setup#available_libraries
     compile 'com.google.firebase:firebase-core:11.4.0'
+
+    // Timber (logger) : https://github.com/JakeWharton/timber
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    // Crashlytics (Crash reporting) : https://docs.fabric.io/android/changelog.html#crashlytics
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.0@aar') {
+      transitive = true;
+    }
 
     //----------------------------------------------------------------------------------------------
     // Testing Dependencies
